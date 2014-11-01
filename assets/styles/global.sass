@@ -1,0 +1,39 @@
+// global variable
+$container-width: 1020px
+$primary-text-color: #000
+
+// functions
+=border-radius($radius)
+  -webkit-border-radius: $radius
+  -moz-border-radius:    $radius
+  -ms-border-radius:     $radius
+  border-radius:         $radius
+
+=border-left-radius($radius)
+  -webkit-border-top-left-radius:    $radius
+  -moz-border-top-left-radius:       $radius
+  -ms-border-top-left-radius:        $radius
+  border-top-left-radius:            $radius
+  -webkit-border-bottom-left-radius: $radius
+  -moz-border-bottom-left-radius:    $radius
+  -ms-border-bottom-left-radius:     $radius
+  border-bottom-left-radius:         $radius
+
+=unselectable()
+  -webkit-user-select: none    
+  -moz-user-select: none
+  -ms-user-select: none
+  -o-user-select: none
+  user-select: none
+
+@import global/footer
+
+.cursor-default
+  cursor: default
+
+.unselectable
+  +unselectable()
+
+
+
+

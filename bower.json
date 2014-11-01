@@ -1,0 +1,16 @@
+{
+  "name": "jeff-terry-net",
+  "version": "0.1.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.1.1",
+    "font-awesome": "~4.1.0",
+    "jquery": "~2.1.1",
+    "jquery.stellar": "~0.6.2",
+    "animate-css": "~3.1.1"
+  }
+}

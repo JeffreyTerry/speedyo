@@ -1,0 +1,30 @@
+$footer-height: 160px
+$footer-image-width: 160px
+
+.footer-box
+  clear: both
+  height: $footer-height
+  background-color: rgba(98, 74, 46, 1)
+  color: white
+
+@media (max-width: $container-width)
+  .footer-box
+    width: $container-width
+
+.footer-image
+  float: left
+  width: $footer-image-width
+
+.footer-text-wrapper
+  float: right
+  padding-top: 50px
+  height: $footer-height - 50px
+  line-height: $footer-height - 50px
+  width: $container-width - $footer-image-width - 20px
+  .footer-text
+    font-family: disco
+    font-size: 20px
+    padding-left: 32px
+
+
+
