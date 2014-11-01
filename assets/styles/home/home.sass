@@ -1,29 +1,75 @@
 $light_purp: #9B59B6
 $emerald: #2ECC71
+$peter: #3498DB
 
 body
   margin: 0
-
-p 
-  color: white
-  font-size: 2.5em
+  background-color: $light_purp
   font-family: 'Montserrat', sans-serif
   font-weight: bold
+  color: white
+
+p
   margin: 0
 
-#user_one
+.user_one
   color: $light_purp
 
-#user_two
+.user_two
   color: $emerald
 
+#chat_box
+  padding: 1em
+  font-size: 2.3em
+  position: relative
+  min-height: 100%
 
 
-.container
-  background-color: $light_purp
+#text_box
+  font-size: 2em
+  background-color: $peter
+  position: fixed
+  bottom: 0
+  height: 2.8em
+  width: 100%
+  padding: 0.25em
 
-#chat_box 
+input::-webkit-input-placeholder
+  color: #FFFFFF !important
 
+input
+  border: none !important
+  border-color: inherit
+  -webkit-box-shadow: none
+  box-shadow: none
+  outline: none !important
+  &:focus
+    border: none !important
+    border-color: inherit
+    -webkit-box-shadow: none
+    box-shadow: none
+    outline: none !important
+  &:hover 
+    border: none !important
+    border-color: inherit
+    -webkit-box-shadow: none
+    box-shadow: none
+    outline: none !important
+  &:active
+    border: none !important
+    border-color: inherit
+    -webkit-box-shadow: none
+    box-shadow: none
+    outline: none !important
+
+input:-moz-placeholder 
+  color:  #FFFFFF !important
+
+input::-moz-placeholder 
+  color:  #FFFFFF !important
+
+input:-ms-input-placeholder 
+  color:  #FFFFFF !important
 
 
 
