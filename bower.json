@@ -12,6 +12,7 @@
     "jquery": "~2.1.1",
     "jquery.stellar": "~0.6.2",
     "animate-css": "~3.1.1",
-    "socket.io-client": "~1.2.0"
+    "socket.io-client": "~1.2.0",
+    "jquery.countdown": "~2.0.4"
   }
 }
