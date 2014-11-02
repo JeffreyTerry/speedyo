@@ -4,6 +4,7 @@ var socket = io(window.location.pathname.substring(5));
 function keyHandler(event) {
   //user presses enter
   if (event.keyCode == 13) {
+    socket.emit('not typing');
 
     var value = $('#text_box').val();
     if($('#chat_box').find('p').length > 0) {
@@ -11,8 +12,8 @@ function keyHandler(event) {
     } else {
       $('#chat_box').prepend("<p class=\"user_one wordwrap\">" + value.toUpperCase() +"</p>");
     }
+
     socket.emit('chat message', value);  
-    socket.emit('not typing');
 
     $('#text_box').val('');
     $('#text_box').attr('placeholder', '');  
@@ -32,6 +33,8 @@ $(document).ready(function () {
   socket.on('chat message', function (msg) {
     $('#chat_box').append("<p class=\"user_two wordwrap\">" + msg.toUpperCase() +"</p>");
     $('#chat_box').scrollTop( $('#chat_box')[0].scrollHeight );
+    var blip = new Audio('../../sounds/blip.mp3');
+    blip.play();
   });
 
   socket.on('typing', function() {
@@ -49,6 +52,8 @@ $(document).ready(function () {
     console.log('welp. other person left.');
     $('body').append("<div class='faded'></div>");
     $('.faded').animate({opacity: 1}, 3000);
+    var over = new Audio('../../sounds/gameover.mp3');
+    over.play();
   });
 
   socket.on('person entered', function() {
@@ -56,6 +61,8 @@ $(document).ready(function () {
       if (event.type == "finish") {
          $('body').append("<div class='faded'></div>");
          $('.faded').animate({opacity: 1}, 3000);
+         var over = new Audio('../../sounds/gameover.mp3');
+         over.play();
       }
       $(this).html(event.strftime('%-M:%S'));
     });
