@@ -30,16 +30,6 @@ module.exports = function(app, config, io){
               });
           }
       });
-      // var formData = {'to': 'THEONLYJEFF2',
-      //                 'username': 'THEONLYJEFF2',
-      //                 'link': 'http://google.com'};
-      // request.post({url: 'http://dev.justyo.co/rpc/yo_from_api_account', form: formData}, function(err, response, body) {
-      //     if(err) {
-      //         res.status(500).json({'err': err});
-      //     } else {
-      //         res.json(body);
-      //     }
-      // });
   });
 
   app.get('/', function(req,res) {
@@ -58,12 +48,18 @@ module.exports = function(app, config, io){
         if(err || count < 1 || count > 2) {
             res.render('404', {});
         } else {
-            var local = io.of('/' + req.params.cid);
-            local.on('connection', function (socket) {
-                socket.on('disconnect', function() {
-                    console.log('bye');
-                });
-            });
+            if (count == 1) {
+              var local = io.of('/' + req.params.cid);
+              local.on('connection', function (socket) {
+                  socket.on('disconnect', function() {
+                      console.log('bye');
+                  });
+                  socket.on('chat message', function(msg) {
+                    console.log(msg);
+                    socket.broadcast.emit('chat message', msg);
+                  });
+              });  
+            } 
             res.render('home/home', {});
         }
     });
@@ -81,6 +77,7 @@ module.exports = function(app, config, io){
           }
       });
   });
+
 };
 
 
