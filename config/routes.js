@@ -41,11 +41,6 @@ module.exports = function(app, config, io){
       //     }
       // });
   });
-  app.get('/fakeyo', function(req, res) {
-    chat.createChat(function(err, response) {
-      res.json({});
-    });
-  });
 
   app.get('/', function(req,res) {
       res.render('home/home', {});
@@ -76,6 +71,7 @@ module.exports = function(app, config, io){
 
   app.get('/fakeyo', function(req, res) {
       chat.findOpenChat(req.query, function(err, obj) {
+        console.log('blaze');
           if(err) {
               chat.createChat("bob", function(err, obj) {
                   res.json({'response': 'OK'});
