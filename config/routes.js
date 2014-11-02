@@ -50,6 +50,8 @@ module.exports = function(app, config, io){
                     --connected;
                     if(connected == 0) {
                         chat.remove(req.params.cid, function(err, response){});
+                    } else {
+                      socket.broadcast.emit('left room');
                     }
                   });
                   socket.on('chat message', function(msg) {

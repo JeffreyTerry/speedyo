@@ -24,7 +24,7 @@ function keyHandler(event) {
 
 $(document).ready(function () {
   $('#text_box').keyup(keyHandler);
-  
+
   socket.on('chat message', function (msg) {
     $('#chat_box').append("<p class=\"user_two wordwrap\">" + msg.toUpperCase() +"</p>");
     $('#chat_box').scrollTop( $('#chat_box')[0].scrollHeight );
@@ -38,5 +38,11 @@ $(document).ready(function () {
   });
   socket.on('not typing', function() {
     $('.typing').remove();
+  });
+
+  socket.on('left room', function() {
+    console.log('welp. other person left.');
+    $('body').append("<div class='faded'><div>The other person does not want to Yo anymore.</div></div>");
+    $('.faded').animate({opacity: 1}, 7000);
   });
 });
