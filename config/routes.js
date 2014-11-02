@@ -31,11 +31,6 @@ module.exports = function(app, config, io){
           }
       });
   });
-  app.get('/fakeyo', function(req, res) {
-    chat.createChat(function(err, response) {
-      res.json({});
-    });
-  });
 
   app.get('/', function(req,res) {
       res.render('home/home', {});
@@ -53,13 +48,18 @@ module.exports = function(app, config, io){
         if(err || count < 1 || count > 2) {
             res.render('404', {});
         } else {
-          
-            var local = io.of('/' + req.params.cid);
-            local.on('connection', function (socket) {
-                socket.on('disconnect', function() {
-                    console.log('bye');
-                });
-            });
+            if (count == 1) {
+              var local = io.of('/' + req.params.cid);
+              local.on('connection', function (socket) {
+                  socket.on('disconnect', function() {
+                      console.log('bye');
+                  });
+                  socket.on('chat message', function(msg) {
+                    console.log(msg);
+                    socket.broadcast.emit('chat message', msg);
+                  });
+              });  
+            } 
             res.render('home/home', {});
         }
     });

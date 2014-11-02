@@ -1,4 +1,5 @@
-var socket = io();
+
+var socket = io(window.location.pathname.substring(5));
 
 function keyHandler(event) {
   if (event.keyCode == 13) {
@@ -16,4 +17,7 @@ function keyHandler(event) {
 
 $(document).ready(function () {
   $('#text_box').keyup(keyHandler);
+  socket.on('chat message', function (msg) {
+    $('#chat_box').children().last().before("<p class=\"user_two\">" + msg +"</p>");
+  });
 });
