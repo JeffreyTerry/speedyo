@@ -20,9 +20,13 @@ function deg2rad(deg) {
 exports.findOpenChat = function(query, cb) {
   Chat.find({count: -1}, function(err, objects) {
     var found = [];
+    var hasPossibleChats = false;
     for(var i = 0; i < objects.length; ++i) {
       if(distanceBetween(objects[i].lat, objects[i].lng, query.lat, query.lng) < 40) {
-        found.push(objects[i]);
+        hasPossibleChats = true;
+        if(objects[i].username != query.username) {
+          found.push(objects[i]);
+        }
       }
     }
     if(found.length != 0) {
@@ -38,7 +42,11 @@ exports.findOpenChat = function(query, cb) {
         Chat.findByIdAndUpdate(obj._id, {$inc: {count: 1}}, cb);
       }
     } else {
-      cb({'err': 'no chats'}, undefined);
+      if(hasPossibleChats) {
+        cb({'err': 'already yod'}, undefined);
+      } else {
+        cb({'err': 'no chats'}, undefined);
+      }
     }
   });
 };
