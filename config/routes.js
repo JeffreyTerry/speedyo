@@ -31,7 +31,6 @@ module.exports = function(app, config, io){
           }
       });
   });
-
   app.get('/fakeyo', function(req, res) {
     chat.createChat(function(err, response) {
       res.json({});
@@ -42,14 +41,28 @@ module.exports = function(app, config, io){
       res.render('home/home', {});
   });
 
+  io.on('connection', function (socket) {
+    console.log('hi');
+    socket.on('disconnect', function(){
+      console.log('bye');
+    });
+  });
+
   app.get('/chat/:cid', function(req, res) {
-      chat.getCount(req.params.cid, function(err, count) {
-          if(err || count < 1 || count > 2) {
-              res.render('404', {});
-          } else {
-              res.render('home/home', {});
-          }
-      });
+    chat.getCount(req.params.cid, function(err, count) {
+        if(err || count < 1 || count > 2) {
+            res.render('404', {});
+        } else {
+          
+            var local = io.of('/' + req.params.cid);
+            local.on('connection', function (socket) {
+                socket.on('disconnect', function() {
+                    console.log('bye');
+                });
+            });
+            res.render('home/home', {});
+        }
+    });
   });
 
   app.get('/fakeyo', function(req, res) {
@@ -63,20 +76,6 @@ module.exports = function(app, config, io){
           }
       });
   });
-
-  io.on('connection', function (socket) {
-
-
-    socket.on('disconnect', function() {
-      console.log("the other person has disconnected");
-    });
-    socket.on('chat message', function(msg) {
-      io.emit('chat message', msg);
-    });
-  }); 
-
-
-  
 
 };
 
