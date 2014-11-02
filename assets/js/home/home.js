@@ -24,6 +24,7 @@ function keyHandler(event) {
 
 $(document).ready(function () {
   $('#text_box').keyup(keyHandler);
+  
   socket.on('chat message', function (msg) {
     $('#chat_box').append("<p class=\"user_two wordwrap\">" + msg.toUpperCase() +"</p>");
     $('#chat_box').scrollTop( $('#chat_box')[0].scrollHeight );
