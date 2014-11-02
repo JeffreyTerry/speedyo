@@ -52,7 +52,7 @@ $(document).ready(function () {
   });
 
   socket.on('person entered', function() {
-    $('#clock').countdown(new Date().getTime() + 100, function (event) {
+    $('#clock').countdown(new Date().getTime() + 60 * 4 * 1000, function (event) {
       if (event.type == "finish") {
          $('body').append("<div class='faded'></div>");
          $('.faded').animate({opacity: 1}, 3000);

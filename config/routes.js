@@ -20,10 +20,10 @@ module.exports = function(app, config, io){
           } else {
               var formData1 = {'username': req.query.username,
                               'api_token': '2ba68aaf-bf89-48bc-b94d-765a8841b557',
-                              'link': 'http://74a4c901.ngrok.com/chat/' + obj._id};
+                              'link': 'http://54.201.26.7/chat/' + obj._id};
               var formData2 = {'username': obj.username,
                               'api_token': '2ba68aaf-bf89-48bc-b94d-765a8841b557',
-                              'link': 'http://74a4c901.ngrok.com/chat/' + obj._id};
+                              'link': 'http://54.201.26.7/chat/' + obj._id};
               request.post({url: 'https://api.justyo.co/yo/', form: formData1}, function(err, response1, body1) {
                   request.post({url: 'https://api.justyo.co/yo/', form: formData2}, function(err, response2, body2) {
                       if(err) {
@@ -43,7 +43,7 @@ module.exports = function(app, config, io){
 
   app.get('/chat/:cid', function(req, res) {
     chat.getCount(req.params.cid, function(err, count) {
-        if(err || count < 1 || count > 100) {
+        if(err || count < 1 || count > 2) {
             res.render('404', {});
         } else {
             //to eliminate duplicate servers, only listen to the 1st person.
