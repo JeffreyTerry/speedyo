@@ -2,7 +2,7 @@ var _ = require('underscore'),
     request = require('request'),
     chat = require('../app/controllers/chat');
 
-module.exports = function(app, config){
+module.exports = function(app, config, io){
     app.get('/yo', function(req, res){
         chat.findOpenChat(req.query, function(err, obj) {
             if(err) {
@@ -41,46 +41,45 @@ module.exports = function(app, config){
         //     }
         // });
     });
-  });
 
-  app.get('/fakeyo', function(req, res) {
-    chat.createChat(function(err, response) {
-      res.json({});
+    app.get('/fakeyo', function(req, res) {
+      chat.createChat(function(err, response) {
+        res.json({});
+      });
     });
-  });
 
-  app.get('/', function(req,res) {
-      res.render('home/home', {});
-  });
+    app.get('/', function(req,res) {
+        res.render('home/home', {});
+    });
 
-  io.on('connection', function (socket) {
-    console.log('hi');
-    socket.on('disconnect', function(){
-      console.log('bye');
-
-  app.get('/chat/:cid', function(req, res) {
-      chat.getCount(req.params.cid, function(err, count) {
-          if(err || count < 1 || count > 2) {
-              res.render('404', {});
-          } else {
-              res.render('home/home', {});
-          }
+    io.on('connection', function (socket) {
+      console.log('hi');
+      socket.on('disconnect', function(){
+        console.log('bye');
       });
-  });
+    });
 
-  app.get('/fakeyo', function(req, res) {
-      chat.findOpenChat(req.query, function(err, obj) {
-          if(err) {
-              chat.createChat("bob", function(err, obj) {
-                  res.json({'response': 'OK'});
-              });
-          } else {
-              res.json({url: '/chat/' + obj._id});
-          }
-      });
-  });
+    app.get('/chat/:cid', function(req, res) {
+        chat.getCount(req.params.cid, function(err, count) {
+            if(err || count < 1 || count > 2) {
+                res.render('404', {});
+            } else {
+                res.render('home/home', {});
+            }
+        });
+    });
 
-  }); 
+    app.get('/fakeyo', function(req, res) {
+        chat.findOpenChat(req.query, function(err, obj) {
+            if(err) {
+                chat.createChat("bob", function(err, obj) {
+                    res.json({'response': 'OK'});
+                });
+            } else {
+                res.json({url: '/chat/' + obj._id});
+            }
+        });
+    });
 };
 
 
