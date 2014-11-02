@@ -4,12 +4,11 @@ block css
   link(rel='stylesheet', href='/styles/home/home.css')
   link (href='http://fonts.googleapis.com/css?family=Montserrat:400,700', rel='stylesheet', type='text/css')
 
-
 block content
-  div.container
-    div#main_container
-      div#chat_box
-        p hi
+  div#main_container
+    div#chat_box
+      div#chat_box_bottom_padding
+    input#text_box.text-center(type='text', autofocus='true', placeholder="SAY YO.")
 
 block js
   script(type="text/javascript", src="/components/socket.io-client/socket.io.js")
