@@ -4,7 +4,6 @@ var socket = io(window.location.pathname.substring(5));
 function keyHandler(event) {
   //user presses enter
   if (event.keyCode == 13) {
-    socket.emit('not typing');
 
     var value = $('#text_box').val();
     if($('#chat_box').find('p').length > 0) {
@@ -13,6 +12,7 @@ function keyHandler(event) {
       $('#chat_box').prepend("<p class=\"user_one wordwrap\">" + value.toUpperCase() +"</p>");
     }
     socket.emit('chat message', value);  
+    socket.emit('not typing');
 
     $('#text_box').val('');
     $('#text_box').attr('placeholder', '');  
@@ -52,7 +52,7 @@ $(document).ready(function () {
   });
 
   socket.on('person entered', function() {
-    $('#clock').countdown(new Date().getTime() + 60 * 4 * 1000 + 3600 * 3000, function (event) {
+    $('#clock').countdown(new Date().getTime() + 60 * 4 * 1000, function (event) {
       if (event.type == "finish") {
          $('body').append("<div class='faded'></div>");
          $('.faded').animate({opacity: 1}, 3000);
