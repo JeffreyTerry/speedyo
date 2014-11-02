@@ -65,6 +65,15 @@ module.exports = function (grunt) {
           livereload: reloadPort
         }
       },
+      sounds: {
+        files: [
+          'assets/sounds/**'
+        ],
+        tasks: ['copy:sounds'],
+        options: {
+          livereload: reloadPort
+        }
+      },
       jade: {
         files: ['app/views/**/*.jade'],
         options: {
@@ -174,6 +183,12 @@ module.exports = function (grunt) {
         src: '**',
         dest: 'public/imgs',
       },
+      sounds: {
+        expand: true,
+        cwd: 'assets/sounds/',
+        src: '**/*.*',
+        dest: 'public/sounds'
+      },
       ico: {
         expand: true,
         cwd: 'assets/imgs/',
@@ -247,5 +262,5 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('default', ['shell:mongo', 'develop', 'clean', 'copy:main', 'sass', 'open:delayed', 'watch']);
-  grunt.registerTask('build', ['clean', 'uglify', 'sass', 'cssmin', 'svgmin', 'imagemin', 'copy:pdfs', 'copy:ico', 'copy:css', 'copy:fonts', 'copy:external_css', 'copy:external_js']);
+  grunt.registerTask('build', ['clean', 'uglify', 'sass', 'cssmin', 'svgmin', 'imagemin', 'copy:pdfs', 'copy:ico', 'copy:css', 'copy:fonts', 'copy:sounds', 'copy:external_css', 'copy:external_js']);
 };
