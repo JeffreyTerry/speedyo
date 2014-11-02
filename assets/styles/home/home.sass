@@ -12,25 +12,49 @@ body
 p
   margin: 0
 
+.wordwrap  
+  white-space: pre-wrap    
+  white-space: -moz-pre-wrap
+  white-space: -pre-wrap   
+  white-space: -o-pre-wrap   
+  word-wrap: break-word
+
 .user_one
   color: white
   text-align: left
-  padding-right: 1em
+  padding-right: 3em
+  margin-bottom: 5px
+  line-height: 120%
 
 .user_two
   color: white
   text-align: right
-  padding-left: 1em
+  padding-left: 3em
+  margin-bottom: 5px
+  line-height: 120%
+
+.typing 
+  width: 100%
+  img
+    margin-top: 5px
+    margin-bottom: 5px
+    float: right
+
+#top_box 
+  position: fixed
+  background-color: $emerald
+  width: 100%
+  height: 4.2em
 
 #chat_box
   padding: 0.5em 0.5em 0 0.5em
-  font-size: 1.6em
-  position: relative
-  min-height: 100%
+  font-size: 1.5em
+  position: fixed
+  top: 2.8em
+  bottom: 4.0em
+  overflow-y: auto
+  overflow-x: hidden
 
-#chat_box_bottom_padding
-  height: 4.20em
-  width: 100%
 
 #text_box
   font-size: 2em
@@ -41,15 +65,13 @@ p
   width: 100%
   padding: 0.25em
 
-input::-webkit-input-placeholder
-  color: #FFFFFF !important
-
 input
   border: none !important
   border-color: inherit
   -webkit-box-shadow: none
   box-shadow: none
   outline: none !important
+  text-transform: uppercase
   &:focus
     border: none !important
     border-color: inherit
@@ -74,6 +96,9 @@ input:-moz-placeholder
 
 input::-moz-placeholder 
   color:  #FFFFFF !important
+
+input::-webkit-input-placeholder
+  color: #FFFFFF !important
 
 input:-ms-input-placeholder 
   color:  #FFFFFF !important
