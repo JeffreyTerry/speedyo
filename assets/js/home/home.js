@@ -47,7 +47,18 @@ $(document).ready(function () {
 
   socket.on('left room', function() {
     console.log('welp. other person left.');
-    $('body').append("<div class='faded'><div>The other person does not want to Yo anymore.</div></div>");
-    $('.faded').animate({opacity: 1}, 7000);
+    $('body').append("<div class='faded'></div>");
+    $('.faded').animate({opacity: 1}, 3000);
   });
+
+  socket.on('person entered', function() {
+    $('#clock').countdown(new Date().getTime() + 100, function (event) {
+      if (event.type == "finish") {
+         $('body').append("<div class='faded'></div>");
+         $('.faded').animate({opacity: 1}, 3000);
+      }
+      $(this).html(event.strftime('%-M:%S'));
+    });
+  });
+
 });

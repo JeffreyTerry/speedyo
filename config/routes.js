@@ -52,6 +52,7 @@ module.exports = function(app, config, io){
               var connected = 0;
               local.on('connection', function (socket) {
                   ++connected;
+
                   socket.on('disconnect', function() {
                     --connected;
                     if(connected == 0) {
@@ -60,6 +61,7 @@ module.exports = function(app, config, io){
                       socket.broadcast.emit('left room');
                     }
                   });
+
                   socket.on('chat message', function(msg) {
                     socket.broadcast.emit('chat message', msg);
                   });
@@ -69,6 +71,12 @@ module.exports = function(app, config, io){
                   socket.on('not typing', function() {
                     socket.broadcast.emit('not typing');
                   });
+
+                  console.log(connected);
+                  if (connected == 2){
+                    socket.broadcast.emit('person entered');
+                    socket.emit('person entered');
+                  }
               });  
             } 
             res.render('home/home', {});
