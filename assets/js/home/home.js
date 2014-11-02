@@ -4,6 +4,7 @@ var socket = io(window.location.pathname.substring(5));
 function keyHandler(event) {
   //user presses enter
   if (event.keyCode == 13) {
+    socket.emit('not typing');
 
     var value = $('#text_box').val();
     if($('#chat_box').find('p').length > 0) {
@@ -12,7 +13,6 @@ function keyHandler(event) {
       $('#chat_box').prepend("<p class=\"user_one wordwrap\">" + value.toUpperCase() +"</p>");
     }
     socket.emit('chat message', value);  
-    socket.emit('not typing');
 
     $('#text_box').val('');
     $('#text_box').attr('placeholder', '');  
