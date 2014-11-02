@@ -45,9 +45,10 @@ module.exports = function(app, config, io){
 
   app.get('/chat/:cid', function(req, res) {
     chat.getCount(req.params.cid, function(err, count) {
-        if(err || count < 1 || count > 2) {
+        if(err || count < 1 || count > 100) {
             res.render('404', {});
         } else {
+            //to eliminate duplicate servers, only listen to the 1st person.
             if (count == 1) {
               var local = io.of('/' + req.params.cid);
               local.on('connection', function (socket) {
@@ -57,6 +58,12 @@ module.exports = function(app, config, io){
                   socket.on('chat message', function(msg) {
                     console.log(msg);
                     socket.broadcast.emit('chat message', msg);
+                  });
+                  socket.on('typing', function () {
+                    socket.broadcast.emit('typing');
+                  });
+                  socket.on('not typing', function() {
+                    socket.broadcast.emit('not typing');
                   });
               });  
             } 
