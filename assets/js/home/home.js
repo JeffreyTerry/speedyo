@@ -19,5 +19,6 @@ $(document).ready(function () {
   $('#text_box').keyup(keyHandler);
   socket.on('chat message', function (msg) {
     $('#chat_box').children().last().before("<p class=\"user_two\">" + msg +"</p>");
+    $('body').scrollTop( $('#chat_box')[0].scrollHeight);
   });
 });

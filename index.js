@@ -24,6 +24,8 @@ var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
+require('./config/express')(app, config);
+require('./config/routes')(app, config, io);
 
 // Starts the server: Export the app when running production, start the server directly when developing.
 if (process.env.NODE_ENV == 'production') {
@@ -33,7 +35,5 @@ if (process.env.NODE_ENV == 'production') {
   console.log('Express server is listening on port %s on %s environment.', config.port, app.settings.env);
 }
 
-require('./config/express')(app, config);
-require('./config/routes')(app, config, io);
 
 
