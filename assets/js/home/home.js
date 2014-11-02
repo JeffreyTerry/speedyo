@@ -11,13 +11,9 @@ function keyHandler(event) {
     $('#text_box').attr('placeholder', '');  
 
     console.log($('#chat_box')[0].scrollHeight);
-    $('body').scrollTop( $('#chat_box')[0].scrollHeight - $('#text_box').height() );
-
-
+    $('body').scrollTop( $('#chat_box')[0].scrollHeight);
   }
 }
-
-
 
 $(document).ready(function () {
   $('#text_box').keyup(keyHandler);

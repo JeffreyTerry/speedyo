@@ -30,16 +30,6 @@ module.exports = function(app, config, io){
               });
           }
       });
-      // var formData = {'to': 'THEONLYJEFF2',
-      //                 'username': 'THEONLYJEFF2',
-      //                 'link': 'http://google.com'};
-      // request.post({url: 'http://dev.justyo.co/rpc/yo_from_api_account', form: formData}, function(err, response, body) {
-      //     if(err) {
-      //         res.status(500).json({'err': err});
-      //     } else {
-      //         res.json(body);
-      //     }
-      // });
   });
 
   app.get('/fakeyo', function(req, res) {
@@ -75,10 +65,17 @@ module.exports = function(app, config, io){
   });
 
   io.on('connection', function (socket) {
+
+
     socket.on('disconnect', function() {
-      console.log('bye');
+      console.log("the other person has disconnected");
+    });
+    socket.on('chat message', function(msg) {
+      io.emit('chat message', msg);
     });
   }); 
+
+
   
 
 };
