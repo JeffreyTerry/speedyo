@@ -4,6 +4,8 @@ var _ = require('underscore'),
 
 module.exports = function(app, config, io){
   app.get('/yo', function(req, res){
+      req.query.lat = parseFloat(req.query.location.split(';')[0]);
+      req.query.lng = parseFloat(req.query.location.split(';')[1]);
       chat.findOpenChat(req.query, function(err, obj) {
           if(err) {
               if(err.err == 'already yod') {

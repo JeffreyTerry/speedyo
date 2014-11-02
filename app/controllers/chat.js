@@ -10,6 +10,7 @@ function distanceBetween(lat1,lon1,lat2,lon2) {
             Math.sin(dLon/2) * Math.sin(dLon/2);
       var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
       var d = R * c; // Distance in km
+      console.log(d);
       return d;
 }
 
@@ -62,7 +63,7 @@ exports.remove = function(id, cb) {
 
 exports.getCount = function(id, cb) {
   Chat.findByIdAndUpdate(id, {$inc: {count: 1}}, function(err, obj) {
-    if(err) {
+    if(err || obj == null) {
       cb(err, undefined);
     } else {
       cb(undefined, obj.count);
