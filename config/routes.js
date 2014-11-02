@@ -4,12 +4,18 @@ var _ = require('underscore'),
 
 module.exports = function(app, config, io){
   app.get('/yo', function(req, res){
+      req.query.lat = parseFloat(req.query.location.split(';')[0]);
+      req.query.lng = parseFloat(req.query.location.split(';')[1]);
       chat.findOpenChat(req.query, function(err, obj) {
           if(err) {
-              if(req.query && req.query.username) {
-                  chat.createChat(req.query.username, req.query.lat, req.query.lng, function(err, object) {
-                      res.json({'response': 'OK'});
-                  });
+              if(err.err == 'already yod') {
+                  res.json({'response': 'ALREADY YOD'})
+              } else {
+                  if(req.query && req.query.username) {
+                      chat.createChat(req.query.username, req.query.lat, req.query.lng, function(err, object) {
+                          res.json({'response': 'OK'});
+                      });
+                  }
               }
           } else {
               var formData1 = {'username': req.query.username,
@@ -73,9 +79,13 @@ module.exports = function(app, config, io){
   app.get('/fakeyo', function(req, res) {
       chat.findOpenChat({lat: 41.258286, lng: -72.989223}, function(err, obj) {
           if(err) {
-              chat.createChat("bob", 41.258286, -72.989223, function(err, obj) {
-                  res.json({'response': 'OK'});
-              });
+            if(err.err == 'already yod') {
+                res.json({'response': 'ALREADY YOD'})
+            } else {
+                chat.createChat('bob', 41.258286, -72.989223, function(err, obj) {
+                    res.json({'response': 'OK'});
+                });
+            }
           } else {
               res.json({url: '/chat/' + obj._id});
           }

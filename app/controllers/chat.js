@@ -10,6 +10,7 @@ function distanceBetween(lat1,lon1,lat2,lon2) {
             Math.sin(dLon/2) * Math.sin(dLon/2);
       var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
       var d = R * c; // Distance in km
+      console.log(d);
       return d;
 }
 
@@ -20,9 +21,13 @@ function deg2rad(deg) {
 exports.findOpenChat = function(query, cb) {
   Chat.find({count: -1}, function(err, objects) {
     var found = [];
+    var hasPossibleChats = false;
     for(var i = 0; i < objects.length; ++i) {
       if(distanceBetween(objects[i].lat, objects[i].lng, query.lat, query.lng) < 40) {
-        found.push(objects[i]);
+        hasPossibleChats = true;
+        if(objects[i].username != query.username) {
+          found.push(objects[i]);
+        }
       }
     }
     if(found.length != 0) {
@@ -38,7 +43,11 @@ exports.findOpenChat = function(query, cb) {
         Chat.findByIdAndUpdate(obj._id, {$inc: {count: 1}}, cb);
       }
     } else {
-      cb({'err': 'no chats'}, undefined);
+      if(hasPossibleChats) {
+        cb({'err': 'already yod'}, undefined);
+      } else {
+        cb({'err': 'no chats'}, undefined);
+      }
     }
   });
 };
@@ -54,7 +63,7 @@ exports.remove = function(id, cb) {
 
 exports.getCount = function(id, cb) {
   Chat.findByIdAndUpdate(id, {$inc: {count: 1}}, function(err, obj) {
-    if(err) {
+    if(err || obj == null) {
       cb(err, undefined);
     } else {
       cb(undefined, obj.count);
