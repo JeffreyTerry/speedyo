@@ -2,7 +2,7 @@
 
 Anonymous 4-minute speed chatting, using Yo.
 
-![Imgur](http://i.imgur.com/gomOxjm.png) 
+![Imgur](http://i.imgur.com/gomOxjm.png) ![Imgur](http://i.imgur.com/PsxAW7y.png) ![Imgur](http://i.imgur.com/Ww7kNRa.png)
 
 
 ##What is it
