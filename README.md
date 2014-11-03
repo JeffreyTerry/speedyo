@@ -1,5 +1,5 @@
 #SpeedYo
 
-Anonymous 5-minute speed dating, using Yo.
+Anonymous 4-minute speed chatting, using Yo.
 
 --YHacks Fall 2014--
