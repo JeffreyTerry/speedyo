@@ -17,5 +17,5 @@ We saw that the very simple and clean Yo API was perfect for our service, as it 
 ##Key Features
 We're most proud of our innovative use of Yo not just as a notification system, but as a full-fledge social connection service. To do this, we built a server that receives Yo's and pairs up two people who are within a 25-mile distance. Once two users are found, both users are Yo'd with a link to their own private 4-minute chatroom. After the 4-minute time limit, or if one person leaves, the entire page fades to white and disappears forever.
 
-
+Technologies Used: nodejs, expressjs, socketio, mongodb, yo-api, jquery
 **--YHacks Fall 2014--**
