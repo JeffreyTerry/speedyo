@@ -57,6 +57,7 @@ $(document).ready(function () {
   });
 
   socket.on('person entered', function() {
+    $('#clock').css('font-size', '2.5em');
     $('#clock').countdown(new Date().getTime() + 60 * 4 * 1000, function (event) {
       if (event.type == "finish") {
          $('body').append("<div class='faded'></div>");
