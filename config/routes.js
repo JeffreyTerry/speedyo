@@ -6,6 +6,7 @@ module.exports = function(app, config, io){
   app.get('/yo', function(req, res){
       req.query.lat = parseFloat(req.query.location.split(';')[0]);
       req.query.lng = parseFloat(req.query.location.split(';')[1]);
+      console.log(req.query, 'blaze');
       chat.findOpenChat(req.query, function(err, obj) {
           if(err) {
               if(err.err == 'already yod') {
@@ -20,10 +21,10 @@ module.exports = function(app, config, io){
           } else {
               var formData1 = {'username': req.query.username,
                               'api_token': '2ba68aaf-bf89-48bc-b94d-765a8841b557',
-                              'link': 'http://74a4c901.ngrok.com/chat/' + obj._id};
+                              'link': 'http://54.201.26.7/chat/' + obj._id};
               var formData2 = {'username': obj.username,
                               'api_token': '2ba68aaf-bf89-48bc-b94d-765a8841b557',
-                              'link': 'http://74a4c901.ngrok.com/chat/' + obj._id};
+                              'link': 'http://54.201.26.7/chat/' + obj._id};
               request.post({url: 'https://api.justyo.co/yo/', form: formData1}, function(err, response1, body1) {
                   request.post({url: 'https://api.justyo.co/yo/', form: formData2}, function(err, response2, body2) {
                       if(err) {

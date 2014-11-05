@@ -18,11 +18,13 @@ fs.readdirSync(modelsPath).forEach(function (file) {
   }
 });
 
-
 // Configures app and routes
 var app = require('express')();
 var server = require('http').Server(app);
-var io = require('socket.io')(server);
+var io = global.io;
+if(!io) {
+  io = require('socket.io')(server);
+}
 
 require('./config/express')(app, config);
 require('./config/routes')(app, config, io);

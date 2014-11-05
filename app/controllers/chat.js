@@ -23,7 +23,7 @@ exports.findOpenChat = function(query, cb) {
     var found = [];
     var hasPossibleChats = false;
     for(var i = 0; i < objects.length; ++i) {
-      if(distanceBetween(objects[i].lat, objects[i].lng, query.lat, query.lng) < 40) {
+      if(distanceBetween(objects[i].lat, objects[i].lng, query.lat, query.lng) < 40 || true) {
         hasPossibleChats = true;
         if(objects[i].username != query.username) {
           found.push(objects[i]);
