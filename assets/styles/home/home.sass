@@ -63,17 +63,32 @@ p
   overflow-x: hidden
   width: 100%
 
+#chat_box_initial_padding
+  height: 100%
+
 #text_box
   font-size: 2em
   background-color: $peter
   position: absolute
-  bottom: 0
-  height: 2.0em
-  width: 100%
+  bottom: 0px
+  width: calc(100% - 100px)
+  right: 100px
+  height: 2em
   padding: 0.25em
+  text-align: center
   +border-radius(0px)
 
-
+#submit_text
+  padding: 0.25em
+  font-size: 2em
+  position: absolute
+  right: 0px
+  width: 100px
+  bottom: 0px
+  height: 2em
+  text-align: center
+  cursor: pointer
+  background-color: $emerald
 
 .faded 
   padding: 10px

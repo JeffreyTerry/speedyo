@@ -2,14 +2,16 @@ extends ../layout
 
 block css
   link(rel='stylesheet', href='/styles/home/home.css')
-  link (href='http://fonts.googleapis.com/css?family=Montserrat:400,700', rel='stylesheet', type='text/css')
+  link(href='http://fonts.googleapis.com/css?family=Montserrat:400,700', rel='stylesheet', type='text/css')
 
 block content
   div#main_container
     div#top_box
       span#clock Waiting for connection
     div#chat_box
+      div#chat_box_initial_padding
     input#text_box.text-center(type='text', autofocus='true', placeholder="SAY YO.")
+    div#submit_text(onclick='keyHandler({keyCode: 13})') SEND
 
 block js
   script(type="text/javascript", src="/components/socket.io-client/socket.io.js")
