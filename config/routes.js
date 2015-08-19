@@ -1,6 +1,8 @@
 var _ = require('underscore'),
     request = require('request'),
-    chat = require('../app/controllers/chat');
+    chat = require('../app/controllers/chat'),
+    Cleverbot = require('cleverbot-node'),
+    cleverbot = new Cleverbot;
 
 module.exports = function(app, config, io){
   app.get('/yo', function(req, res){
@@ -77,8 +79,8 @@ module.exports = function(app, config, io){
                     socket.broadcast.emit('person entered');
                     socket.emit('person entered');
                   }
-              });  
-            } 
+              });
+            }
             res.render('home/home', {});
         }
     });
@@ -100,6 +102,33 @@ module.exports = function(app, config, io){
       });
   });
 
+  // This sets cleverbot up on the index page
+  var local = io.of('/');
+  local.on('connection', function (socket) {
+      socket.on('disconnect', function() {
+        socket.broadcast.emit('left room');
+      });
+
+      socket.on('chat message', function(msg) {
+        socket.broadcast.emit('chat message', msg);
+        socket.emit('typing');
+        Cleverbot.prepare(function(){
+          cleverbot.write(msg, function (response) {
+            socket.emit('not typing');
+            socket.emit('chat message', response.message);
+          });
+        });
+      });
+      socket.on('typing', function () {
+        socket.broadcast.emit('typing');
+      });
+      socket.on('not typing', function() {
+        socket.broadcast.emit('not typing');
+      });
+
+      socket.broadcast.emit('person entered');
+      socket.emit('person entered');
+  });
 };
 
 

@@ -8,7 +8,7 @@ var config = {
   development: {
     root: rootPath,
     app: {
-      name: 'Yo'
+      name: 'SpeedYo'
     },
     port: 3000,
     db: 'mongodb://localhost/Yo-development'
@@ -17,7 +17,7 @@ var config = {
   test: {
     root: rootPath,
     app: {
-      name: 'Yo'
+      name: 'SpeedYo'
     },
     port: 3000,
     db: 'mongodb://localhost/Yo-test'
@@ -26,7 +26,7 @@ var config = {
   production: {
     root: rootPath,
     app: {
-      name: 'Yo'
+      name: 'SpeedYo'
     },
     port: 3000,
     cred: {
